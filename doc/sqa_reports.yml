@@ -1,0 +1,6 @@
+Applications:
+    dendrite:
+        app_types:
+            - DendriteApp
+        content_directory: ${ROOT_DIR}/doc/content
+        log_default: WARNING
