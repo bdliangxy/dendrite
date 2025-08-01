@@ -4,6 +4,7 @@ Dendrite
 Fork "Dendrite" to create a new MOOSE-based application.
 
 For more information see: [https://mooseframework.inl.gov/getting_started/new_users.html#create-an-app](https://mooseframework.inl.gov/getting_started/new_users.html#create-an-app)
+
 在浙江大学洪子健老师的MOOSE模拟锂枝晶的开源代码基础上做修改，引用论文：
 > ACS Energy Lett. 2018, 3, 7, 1737–1743
 
