@@ -8,4 +8,5 @@ For more information see: [https://mooseframework.inl.gov/getting_started/new_us
 > ACS Energy Lett. 2018, 3, 7, 1737–1743
 
 **输入文件在problems中，main表示洪老师的原模型，公式不做修改**
+
 main中更新内容：更新MOOSE语法，添加自适应时间步长和网格格划分，调整求解器，增加模型收敛性
