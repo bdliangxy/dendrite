@@ -37,7 +37,7 @@ For more information see: [https://mooseframework.inl.gov/getting_started/new_us
    > 增加各向异性理论上应该是增加二次枝晶的生成，但是结果没见到二次枝晶，收敛性却提高了，我也不知道原因。
 4. 求解器改用ilu
 
-该版本的平均时间步长是0.05s左右，比其他两个收敛效果都好一些，以下分别为使用该模型计算的35s内序变量，$ Li^+ $浓度场与电场分布图
+该版本的平均时间步长是0.05s左右，比其他两个收敛效果都好一些，以下分别为使用该模型计算的35s内序变量，阳离子浓度场与电场分布图
 ![序变量](https://github.com/bdliangxy/dendrite/blob/main/problems/enhenced_ani/%E5%BA%8F%E5%8F%98%E9%87%8F.gif)
 ![浓度场](https://github.com/bdliangxy/dendrite/blob/main/problems/enhenced_ani/%E6%B5%93%E5%BA%A6.gif)
 ![电场](https://github.com/bdliangxy/dendrite/blob/main/problems/enhenced_ani/%E7%94%B5%E5%9C%BA.gif)
