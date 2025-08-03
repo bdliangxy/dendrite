@@ -10,7 +10,7 @@ For more information see: [https://mooseframework.inl.gov/getting_started/new_us
 在浙江大学洪子健老师的MOOSE模拟锂枝晶的开源代码基础上做修改，引用论文：
 > ACS Energy Lett. 2018, 3, 7, 1737–1743
 
-**输入文件在problems文件夹中，大部分的改动在这里。要使用该模型，需要安装MOOSE，新建名为dendrite的application，在problems文件夹中选择合适的输入文件，详情参考洪老师的[protocol论文](https://www.sciencedirect.com/science/article/pii/S2666166722005937?via%3Dihub)**
+**输入文件在problems文件夹中，大部分的改动在这里。要使用该模型，需要安装MOOSE，新建名为dendrite的application，在problems文件夹中选择合适的输入文件，详情参考洪老师的[protocol论文](https://www.sciencedirect.com/science/article/pii/S2666166722005937?via%3Dihub)，接下来简单介绍problems中的输入文件**，
 
 # original版本
 
