@@ -33,6 +33,7 @@ For more information see: [https://mooseframework.inl.gov/getting_started/new_us
 1. 将求解域裁剪一半，加密网格，初始值设置为半径为5的半圆。
 2. 在原模型基础上，自由能系数由常数变成具备各向异性的参数ε^2
    > [!NOTE]
+   > 
    > 增加各向异性理论上应该是增加二次枝晶的生成，但是结果没见到二次枝晶，收敛性却提高了，我也不知道原因。
 4. 求解器改用ilu
 
