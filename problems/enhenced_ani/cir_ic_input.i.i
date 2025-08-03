@@ -1,20 +1,14 @@
 # input file.
-# Define mesh. 2-D system, simulation size 200*200.
-# 语法更新：
-# 1. Function中的value更新为expression
-# 2. w_dot、coupled_etadot、coupled_pos、liquid_GrandPotential、solid_GrandPotential
-#   total_GrandPotential、coupled_eta_function、susceptibility、Mobility_coefficient、
-#   Free、Migration_coefficient、Bultervolmer、concentration、Le1中的args换成coupled_variables
-# 3. [Materials]下所有的f_name替换成property_name
-# 4. [Materials]块中所有的function全部替换成expression
-# 5. [Outputs]块中interval替换成time_step_interval
+# Define mesh. 2-D system, simulation size 200*80.
+# 将初始值设置为半圆形
 [Mesh]
   type = GeneratedMesh
   dim = 2
-  nx = 100
+  nx = 330
   xmax = 200
-  ny = 100
-  ymax = 200
+  ny = 140
+  ymin = -40
+  ymax = 40
 []
 # variables. w: chemical potential, eta: order parameter, pot: applied overpotential.
 [Variables]
@@ -25,37 +19,32 @@
   [pot]
   []
 []
-# Creating functions for initial conditions.
-[Functions]
-  [ic_func_eta]
-    type = ParsedFunction
-    expression = 0.5*(1.0-1.0*tanh((x-20)*2))
-  []
-  [ic_func_c]
-    type = ParsedFunction
-    expression = 0
-  []
-  [ic_func_pot]
-    type = ParsedFunction
-    expression = -0.225*(1.0-tanh((x-20)*2))
-  []
-[]
 # Initial conditions.
 [ICs]
   [eta]
     variable = eta
-    type = FunctionIC
-    function = ic_func_eta
+    type = SmoothCircleIC
+    int_width = 3
+    x1 = 0
+    y1 = 0
+    radius = 5
+    outvalue = 0
+    invalue = 1
   []
   [w]
     variable = w
-    type = FunctionIC
-    function = ic_func_c
+    type = ConstantIC
+    value = 0
   []
   [pot]
     variable = pot
-    type = FunctionIC
-    function = ic_func_pot
+    type = SmoothCircleIC
+    int_width = 3
+    x1 = 0
+    y1 = 0
+    radius = 5
+    outvalue = 0
+    invalue = -0.45
   []
 []
 # Boundary conditions.
@@ -73,13 +62,13 @@
     value = 0
   []
   [left_eta]
-    type = DirichletBC
+    type = NeumannBC
     variable = 'eta'
     boundary = 'left'
-    value = 1
+    value = 0
   []
   [right_eta]
-    type = DirichletBC
+    type = NeumannBC
     variable = 'eta'
     boundary = 'right'
     value = 0
@@ -185,10 +174,21 @@
     f_name = FF
   []
   # interfacial energy
-  [AC_int]
-    type = ACInterface
+  #[AC_int]
+  #  type = ACInterface
+  #  variable = eta
+  #[]
+  # 增加各向异性强度
+  [AC_int1]
+    type = ACInterfaceKobayashi1
     variable = eta
   []
+
+  [AC_int2]
+    type = ACInterfaceKobayashi2
+    variable = eta
+  []
+
   [Noiseeta]
     type = LangevinNoise
     variable = eta
@@ -322,6 +322,13 @@
     expression = 'S1*h+S2*(1-h)'
     derivative_order = 1
   []
+  # 各向异性参数
+  [./material]
+    type = InterfaceOrientationMaterial
+    eps_bar = 0.3
+    op = eta
+    mode_number = 4
+  [../]
 []
 [GlobalParams]
   enable_jit = false # Disable JIT
@@ -352,17 +359,17 @@
     optimal_iterations = 8
     iteration_window = 2
     dt = 0.0003
-    growth_factor = 1.13
-    cutback_factor = 0.5
+    growth_factor = 1.2
+    cutback_factor = 0.8
   [../]
-  [./Adaptivity]
-    initial_adaptivity = 2 # Number of times mesh is adapted to initial condition
-    refine_fraction = 0.4 # Fraction of high error that will be refined
-    coarsen_fraction = 0.2 # Fraction of low error that will coarsened
-    max_h_level = 3 # Max number of refinements used, starting from initial mesh (before uniform refinement)
-    weight_names = 'eta w pot'
-    weight_values = '1 0.5 0.5'
-  [../]
+  #[./Adaptivity]
+  #  initial_adaptivity = 2 # Number of times mesh is adapted to initial condition
+  #  refine_fraction = 0.4 # Fraction of high error that will be refined
+  #  coarsen_fraction = 0.2 # Fraction of low error that will coarsened
+  #  max_h_level = 3 # Max number of refinements used, starting from initial mesh (before uniform refinement)
+  #  weight_names = 'eta w pot'
+  #  weight_values = '1 0.5 0.5'
+  #[../]
 []
 
 [Outputs]
