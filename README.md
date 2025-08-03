@@ -28,13 +28,13 @@ For more information see: [https://mooseframework.inl.gov/getting_started/new_us
 
 更改：将求解域裁剪一半，加密网格，初始值设置为半径为5的半圆。
 
-在原模型基础上，自由能系数由常数$kappa$变成具备各向异性的$epsilon^2$
+在原模型基础上，自由能系数由常数$ kappa $变成具备各向异性的$ epsilon^2 $
 
 求解器改用ilu
 
-该版本的平均时间步长是0.05s左右，比其他两个收敛效果都好一些，以下分别为使用该模型计算的序变量，电场和$Li^+$浓度场分布图
+该版本的平均时间步长是0.05s左右，比其他两个收敛效果都好一些，以下分别为使用该模型计算的序变量，$ Li^+ $浓度场与电场分布图
 ![序变量](https://github.com/bdliangxy/dendrite/blob/main/problems/enhenced_ani/%E5%BA%8F%E5%8F%98%E9%87%8F.gif)
-![电场](https://github.com/bdliangxy/dendrite/blob/main/problems/enhenced_ani/%E7%94%B5%E5%9C%BA.gif)
 ![浓度场](https://github.com/bdliangxy/dendrite/blob/main/problems/enhenced_ani/%E6%B5%93%E5%BA%A6.gif)
+![电场](https://github.com/bdliangxy/dendrite/blob/main/problems/enhenced_ani/%E7%94%B5%E5%9C%BA.gif)
 
 
